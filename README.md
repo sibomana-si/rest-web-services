@@ -5,7 +5,7 @@ A RESTful API that can be used to manage a fleet of drivers, and allocate driver
 ## Setup
 - use the **_data.sql_** script to create the database and relevant tables
 - import the project into your IDE
-- update the **_application.properties_** file to specify your database credentials (username and password)
+- update the **_application.properties_** file (src/main/resources/) to specify your database credentials (username and password)
 - execute the file **_Taxi24WebServiceApplication.java_** to start the application
 
 ## Features
