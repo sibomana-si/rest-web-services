@@ -1,4 +1,4 @@
-package com.taxi24.rest.webservices.taxi24webservice;
+package com.taxi24.rest.webservices.taxi24webservice.controller;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -16,6 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import com.taxi24.rest.webservices.taxi24webservice.controller.DriverProximity;
+import com.taxi24.rest.webservices.taxi24webservice.exception.UserNotFoundException;
+import com.taxi24.rest.webservices.taxi24webservice.model.Driver;
+import com.taxi24.rest.webservices.taxi24webservice.controller.DriverRepository;
+import com.taxi24.rest.webservices.taxi24webservice.model.Rider;
+import com.taxi24.rest.webservices.taxi24webservice.controller.RiderRepository;
 
 
 @RestController
@@ -48,18 +55,18 @@ public class RiderResource {
 	
 	// get a specific rider by id
 	@GetMapping("/riders/{id}")
-	public Optional<Rider> retrieveRider(@PathVariable int id) {
+	public Rider retrieveRider(@PathVariable(value = "id") int id) {
 		Optional<Rider> rider = riderRepository.findById(id);
 		
 		if(!rider.isPresent())
 			throw new UserNotFoundException("id-" + id);
 		
-		return rider;
+		return rider.get();
 	}
 	
 	// get nearby drivers
 	@GetMapping("/riders/{id}/nearby")
-	public List<Driver> retrieveNearbyDrivers(@PathVariable int id) {
+	public List<Driver> retrieveNearbyDrivers(@PathVariable(value = "id") int id) {
 		List<Driver> nearbyDrivers = new ArrayList<>();
 		PriorityQueue<DriverProximity>  driverProximityQueue = new PriorityQueue<>();
 		

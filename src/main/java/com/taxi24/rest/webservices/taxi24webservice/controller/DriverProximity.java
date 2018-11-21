@@ -1,4 +1,6 @@
-package com.taxi24.rest.webservices.taxi24webservice;
+package com.taxi24.rest.webservices.taxi24webservice.controller;
+
+import com.taxi24.rest.webservices.taxi24webservice.model.Driver;
 
 public class DriverProximity implements Comparable<DriverProximity>{
 	

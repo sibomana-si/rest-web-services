@@ -1,4 +1,4 @@
-package com.taxi24.rest.webservices.taxi24webservice;
+package com.taxi24.rest.webservices.taxi24webservice.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,11 +24,12 @@ public class Driver {
 	private Integer xLocation;
 	private Integer yLocation;
 	
-	private Integer driverStatus;
+	private Integer driverStatus = 0;
+	
 	
 	protected Driver() {
 	}
-
+		
 	public Driver(String firstName, String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;

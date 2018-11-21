@@ -1,4 +1,4 @@
-package com.taxi24.rest.webservices.taxi24webservice;
+package com.taxi24.rest.webservices.taxi24webservice.controller;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import com.taxi24.rest.webservices.taxi24webservice.exception.UserNotFoundException;
+import com.taxi24.rest.webservices.taxi24webservice.model.Driver;
+import com.taxi24.rest.webservices.taxi24webservice.controller.DriverRepository;
 
 
 @RestController
@@ -45,14 +49,15 @@ public class DriverResource {
 	
 	// get a specific driver by id
 	@GetMapping("/drivers/{id}")
-	public Optional<Driver> retrieveDriver(@PathVariable int id) {
+	public Driver retrieveDriver(@PathVariable(value = "id") int id) {
 		Optional<Driver> driver = driverRepository.findById(id);
 		
 		if(!driver.isPresent())
 			throw new UserNotFoundException("id-" + id);
 		
-		return driver;
-	}
+		return driver.get();
+	} 
+	
 	
 	// get all available drivers
 	@GetMapping("/drivers/available")
@@ -62,7 +67,7 @@ public class DriverResource {
 		
 	// get all available drivers within a 3KM distance of provided location 
 	@GetMapping("/drivers/nearby")
-	public List<Driver> retrieveAllNearbyDrivers(@RequestParam Integer xLoc, @RequestParam Integer yLoc) {
+	public List<Driver> retrieveAllNearbyDrivers(@RequestParam(value = "xLoc") Integer xLoc, @RequestParam(value = "yLoc") Integer yLoc) {
 		List<Driver> nearbyDrivers = new ArrayList<>();
 		List<Driver> availableDrivers = driverRepository.findByDriverStatus(0);
 		

@@ -1,4 +1,4 @@
-package com.taxi24.rest.webservices.taxi24webservice;
+package com.taxi24.rest.webservices.taxi24webservice.exception;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package com.taxi24.rest.webservices.taxi24webservice;
+package com.taxi24.rest.webservices.taxi24webservice.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
